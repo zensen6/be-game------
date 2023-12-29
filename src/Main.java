@@ -160,20 +160,3 @@ public class Main {
 
 
 }
-
-/*
-public static string Personality(int n) {
-
-
-}
-
-
-
-
-
-
-
-
-
-
- */
