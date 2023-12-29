@@ -35,6 +35,7 @@ public class Main {
 
         Scanner scanner = new Scanner(System.in);
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        System.out.println("Enter the number of Player participating the game. Your number is the last number of all player.");
         N = scanner.nextInt();  // # of player
         sum = new int[N+1];
         done = new boolean[N+1];
@@ -53,11 +54,12 @@ public class Main {
                     sum[i] += ret;
                     System.out.println("Player " + i + "'s score: " + sum[i]);
                 }
-                System.out.println("It's your turn. Choose whether pick up the card or not.");
+                System.out.println("It's your turn. Choose whether pick up the card or not. Y/N");
                 yes = br.readLine();
                 if (yes.equals("Y")) {
                     int ret = shuffle();
                     sum[N] += ret;
+                    c++;
                     System.out.println("Player " + N + "'s score: " + sum[N]);
                 } else {
                     done[N] = true;
@@ -65,7 +67,7 @@ public class Main {
 
             } else {
                 for (int i = 1; i <= N - 1; i++) {
-
+                    if(done[i]) continue;
                     int target = (21 - sum[i]);
                     s = 0;
                     for (int j = 1; j <= min(target, 13); j++) {
@@ -87,11 +89,13 @@ public class Main {
                         }
                     }
                 }
-                System.out.println("It's your turn. Choose whether pick up the card or not.");
+                if(done[N]) continue;
+                System.out.println("It's your turn. Choose whether pick up the card or not. Y/N");
                 yes = br.readLine();
                 if (yes.equals("Y")) {
                     int ret = shuffle();
                     sum[N] += ret;
+                    c++;
                     if (sum[N] > 21) {
                         done[N] = true;
                         System.out.println("Your score: " + sum[N] + " is over 21!");
